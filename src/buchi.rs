@@ -1,16 +1,19 @@
 use std::collections::HashSet;
 
+#[derive(Debug)] 
 pub struct State {
     id: usize,
     is_accepting: bool
 }
 
+#[derive(Debug)] 
 pub struct Buchi {
     states: Vec<State>,
     init_state: usize,
     transitions: Vec<Vec<(usize, char)>>
 }
 
+#[derive(Debug)] 
 pub struct BuchiBuilder {
     num_states: usize,
     initial_state: Option<usize>,
