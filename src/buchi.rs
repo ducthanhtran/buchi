@@ -51,3 +51,14 @@ impl BuchiBuilder {
         })
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn build_no_initial_state() {
+        let result = BuchiBuilder::new(1).build();
+        assert_eq!(result.unwrap_err(), "Initial state not set");
+    }
+}
