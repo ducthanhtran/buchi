@@ -1,17 +1,17 @@
 use std::collections::HashSet;
 
-struct State {
+pub struct State {
     id: usize,
     is_accepting: bool
 }
 
-struct Buchi {
+pub struct Buchi {
     states: Vec<State>,
     init_state: usize,
     transitions: Vec<Vec<(usize, char)>>
 }
 
-struct BuchiBuilder {
+pub struct BuchiBuilder {
     num_states: usize,
     initial_state: Option<usize>,
     accepting_states: HashSet<usize>,
@@ -19,7 +19,7 @@ struct BuchiBuilder {
 }
 
 impl BuchiBuilder {
-    fn new(num_states: usize) -> Self {
+    pub fn new(num_states: usize) -> Self {
         BuchiBuilder {
             num_states,
             initial_state: None,
@@ -28,7 +28,7 @@ impl BuchiBuilder {
         }
     }
 
-    fn build(self) -> Result<Buchi, String> {
+    pub fn build(self) -> Result<Buchi, String> {
         let init_state = self.initial_state.ok_or_else(|| "Initial state not set".to_string())?;
         
         if self.accepting_states.is_empty() {
