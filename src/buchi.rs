@@ -27,4 +27,24 @@ impl BuchiBuilder {
             transitions: vec![Vec::new(); num_states]
         }
     }
+
+    fn build(self) -> Result<Buchi, String> {
+        let init_state = self.initial_state.ok_or_else(|| "Initial state not set".to_string())?;
+        
+        if self.accepting_states.is_empty() {
+            return Err("At least one accepting state required.".to_string());
+        }
+
+        let states = (0..self.num_states)
+            .map(|id| State {
+                id,
+                is_accepting: self.accepting_states.contains(&id)
+            }).collect();
+        
+        Ok(Buchi {
+            states,
+            init_state,
+            transitions: self.transitions
+        })
+    }
 }
